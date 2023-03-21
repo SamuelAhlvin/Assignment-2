@@ -8,11 +8,17 @@ export default function MovieList() {
   return <>
     {s.movies.map(({ id, title, description: d }) => <Link
       to={'/movie-detail/' + id}>
-      <div className="movie">
-        <h3>{title}</h3>
-        <img src={'https://cinema-rest.nodehill.se' + d.posterImage} />
-        <p>Length {d.length}</p>
-        <hr />
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <div className="movie">
+              <h3>{title}</h3>
+              <img src={'https://cinema-rest.nodehill.se' + d.posterImage} />
+              <p>Length {d.length}</p>
+              <hr />
+            </div>
+          </div>
+        </div>
       </div>
     </Link>
     )}

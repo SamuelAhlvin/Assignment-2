@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useStates } from './utilities/states';
 import MovieList from './MovieList';
 import MovieDetail from './MovieDetail';
+import ScreeningsOverview from './Screenings';
 import { Routes, Route } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./header/NavBar";
@@ -21,13 +22,11 @@ function App() {
     <header>
       <Navbar />
     </header>
-    <>
-      <Routes>
-        <Route path="/" element={<MovieList />}></Route>
-        <Route path="/movie-detail/:id" element={<MovieDetail />} />
-        <Route path="/screenings" element={<MovieList />}></Route>
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<MovieList />}></Route>
+      <Route path="/movie-detail/:id" element={<MovieDetail />} />
+      <Route path="/screenings" element={<ScreeningsOverview />}></Route>
+    </Routes>
   </>;
 }
 
