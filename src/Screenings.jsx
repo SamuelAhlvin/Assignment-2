@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useStates } from './utilities/states';
+import { Link } from 'react-router-dom';
 
 export default function ScreeningsOverview() {
   const [screenings, setScreenings] = useState([]);
   const [movies, setMovies] = useState([]);
+  const [categoryFilter, setCategoryFilter] = useState(null);
 
-  const s = useStates('main');
+  //const s = useStates('main');
 
   useEffect(() => {
     async function fetchScreenings() {
@@ -54,15 +56,39 @@ export default function ScreeningsOverview() {
     return null;
   };
 
+  const categoryChange = (category) => {
+    setCategoryFilter(category);
+    const filteredMovies = movies.filter(movie => movie.description.categories.includes(category));
+    const movieIds = filteredMovies.map(movie => movie.title);
+
+    const filteredScreenings = screenings.filter(screening => movieIds.includes(screening.movie));
+
+    setMovies([])
+    setMovies(filteredMovies);
+    setScreenings([])
+    setScreenings(filteredScreenings)
+  }
+
   return (
     <div>
+      <div>
+        <select value={categoryFilter} onChange={(e) => categoryChange(e.target.value)}>
+          <option value="">All Categories</option>
+          <option value="Action">Action</option>
+          <option value="Comedy">Comedy</option>
+          <option value="Drama">Drama</option>
+          {/* add more categories here */}
+        </select>
+      </div>
       {Object.keys(groupedScreenings).map((date) => (
         <div key={date}>
           <h2>{new Date(date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}</h2>
           <ul>
             {groupedScreenings[date].map((screening) => (
               <li key={screening.screeningId}>
-                <img id="screening-img" src={getPosterImage(screening.movie)} alt="Movie Poster" />
+                <Link
+                  to={'/booking/'}>
+                  <img id="screening-img" src={getPosterImage(screening.movie)} alt="Movie Poster" /></Link>
                 {new Date(screening.screeningTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} - {screening.movie} ({screening.auditorium})
                 <p>Length: - {getLength(screening.movie)} minutes</p>
               </li>

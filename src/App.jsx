@@ -4,6 +4,7 @@ import { useStates } from './utilities/states';
 import MovieList from './MovieList';
 import MovieDetail from './MovieDetail';
 import ScreeningsOverview from './Screenings';
+import Booking from './Booking';
 import { Routes, Route } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./header/NavBar";
@@ -28,6 +29,7 @@ function App() {
       <Route path="/" element={<MovieList />}></Route>
       <Route path="/movie-detail/:id" element={<MovieDetail />} />
       <Route path="/screenings" element={<ScreeningsOverview />}></Route>
+      <Route path="/booking" element={<Booking />}></Route>
     </Routes>
   </>;
 }
