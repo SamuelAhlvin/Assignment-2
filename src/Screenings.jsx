@@ -3,14 +3,22 @@ import { useStates } from './utilities/states';
 
 export default function ScreeningsOverview() {
   const [screenings, setScreenings] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     async function fetchScreenings() {
       const response = await fetch("/api/screenings_overview");
-      const data = await response.json();
-      setScreenings(data);
+      const screeningData = await response.json();
+      setScreenings(screeningData);
     }
+    async function fetchMovies() {
+      const movieRes = await fetch("/api/movies")
+      const movieData = await movieRes.json();
+      setMovies(movieData);
+    }
+
     fetchScreenings();
+    fetchMovies();
   }, []);
 
   const sortedScreenings = screenings.sort(
@@ -26,6 +34,15 @@ export default function ScreeningsOverview() {
     groupedScreenings[date].push(screening);
   });
 
+  const getPosterImage = (movieTitle) => {
+    const movie = movies.find((m) => m.title === movieTitle);
+    if (movie) {
+
+      return 'https://cinema-rest.nodehill.se' + movie.description.posterImage;
+    }
+    return null;
+  };
+
   return (
     <div>
       {Object.keys(groupedScreenings).map((date) => (
@@ -34,6 +51,7 @@ export default function ScreeningsOverview() {
           <ul>
             {groupedScreenings[date].map((screening) => (
               <li key={screening.screeningId}>
+                <img id="screening-img" src={getPosterImage(screening.movie)} alt="Movie Poster" />
                 {new Date(screening.screeningTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} - {screening.movie} ({screening.auditorium})
               </li>
             ))}

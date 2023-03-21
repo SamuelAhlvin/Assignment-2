@@ -16,3 +16,15 @@ header {
   display: inline-block;
   margin-top: -5px;
 }
+
+#screening-img {
+  width: 120px;
+  margin-right: 50px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+
+}
+
+ul {
+  text-align: left;
+}
