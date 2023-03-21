@@ -13,6 +13,7 @@ export default function () {
 
   // find our movie and deconstruct properties from it to variables
   const movie = s.movies.find(movie => movie.id == id);
+  const screenings = s.screenings.filter(screening => screening.movieId == id);
   const { title, description } = movie;
   const { length, categories, posterImage } = description;
 
@@ -20,6 +21,10 @@ export default function () {
     <h3>{title}</h3>
     <h4>Length: {length} minutes</h4>
     <h4>Categories: {categories.join(', ')}</h4>
+    <h4>Dates Showing:</h4>
+    {screenings.map(screening => (
+      <h4>{new Date(screening.time).toLocaleTimeString("en-US", { weekday: "long", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" })}</h4>
+    ))}
     <img src={'https://cinema-rest.nodehill.se' + posterImage} />
     <hr />
   </div>

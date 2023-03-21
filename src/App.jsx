@@ -10,11 +10,13 @@ import Navbar from "./header/NavBar";
 
 function App() {
   const s = useStates('main', {
-    movies: []
+    movies: [],
+    screenings: []
   });
   useEffect(() => {
     (async () => {
       s.movies = await (await fetch('/api/movies')).json();
+      s.screenings = await (await fetch('/api/screenings')).json();
     })();
   }, []);
 
