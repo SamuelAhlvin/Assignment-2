@@ -4,6 +4,8 @@ import { useStates } from './utilities/states';
 import MovieList from './MovieList';
 import MovieDetail from './MovieDetail';
 import { Routes, Route } from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./header/NavBar";
 
 function App() {
   const s = useStates('main', {
@@ -16,10 +18,15 @@ function App() {
   }, []);
 
   return s.movies.length === 0 ? null : <>
-    <Routes>
-      <Route path="/" element={<MovieList />}></Route>
-      <Route path="/movie-detail/:id" element={<MovieDetail />} />
-    </Routes>
+    <header>
+      <Navbar />
+    </header>
+    <>
+      <Routes>
+        <Route path="/" element={<MovieList />}></Route>
+        <Route path="/movie-detail/:id" element={<MovieDetail />} />
+      </Routes>
+    </>
   </>;
 }
 
