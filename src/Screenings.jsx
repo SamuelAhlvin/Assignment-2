@@ -80,9 +80,26 @@ export default function ScreeningsOverview() {
         <select value={categoryFilter} onChange={(e) => categoryChange(e.target.value)}>
           <option value="">All Categories</option>
           <option value="Action">Action</option>
+          <option value="Adventure">Adventure</option>
           <option value="Comedy">Comedy</option>
           <option value="Drama">Drama</option>
-          {/* add more categories here */}
+          <option value="Fantasy">Fantasy</option>
+          <option value="Horror">Horror</option>
+          <option value="Family">Family</option>
+          <option value="Documentary">Documentary</option>
+          <option value="Biography">Biography</option>
+          <option value="Music">Music</option>
+          <option value="Crime">Crime</option>
+          <option value="Thriller">Thriller</option>
+          <option value="Sci-Fi">Sci-Fi</option>
+          <option value="Romance">Romance</option>
+          <option value="Other">Other</option>
+          <option value="Animation">Animation</option>
+          <option value="Mystery">Mystery</option>
+          <option value="Musical">Musical</option>
+          <option value="Sport">Sport</option>
+          <option value="History">History</option>
+          <option value="News">News</option>
         </select>
       </div>
       {Object.keys(groupedScreenings).map((date) => (
